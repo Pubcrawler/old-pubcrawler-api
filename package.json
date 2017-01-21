@@ -30,7 +30,8 @@
     "jest-cli": "^18.1.0",
     "mongoose": "^4.7.7",
     "passport": "^0.3.2",
-    "passport-facebook": "^2.1.1"
+    "passport-facebook": "^2.1.1",
+    "winston": "^2.3.1"
   },
   "devDependencies": {
     "nodemon": "^1.11.0"

@@ -2,6 +2,7 @@ import http from 'http';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import express from 'express';
+import winston from 'winston';
 
 import api from './api';
 import config from './config.json';
@@ -26,6 +27,6 @@ app.use('/api', api());
 
 app.server.listen(process.env.PORT || config.port);
 
-console.log(`Server started on ${app.server.address().port}`);
+winston.info(`Server started on ${app.server.address().port}`);
 
 export default app;
