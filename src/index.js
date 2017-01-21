@@ -3,7 +3,9 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 import express from 'express';
 
+import api from './api';
 import config from './config.json';
+import middleware from './middleware';
 
 const app = express();
 
@@ -18,5 +20,12 @@ app.use(bodyParser.json({
   limit: config.bodyLimit,
 }));
 
+app.use(middleware());
+
+app.use('/api', api());
+
+app.server.listen(process.env.PORT || config.port);
+
+console.log(`Server started on ${app.server.address().port}`);
 
 export default app;
