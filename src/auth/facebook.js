@@ -13,7 +13,7 @@ export default (config) => {
     passport.authenticate('facebook'));
 
   api.get('/facebook/callback', passport.authenticate('facebook', { failureRedirect: '/version' }), (req, res) => {
-    res.redirect('/');
+    res.redirect('/api/me');
   });
 
   passport.use(new FacebookStrategy({
@@ -36,7 +36,7 @@ export default (config) => {
             name: profile.displayName,
             id: profile.id,
             gender: profile.gender,
-            picture: profile.photos ? profile.photos.value : null,
+            picture: profile.photos ? profile.photos[0].value : null,
             email: profile.emails ? profile.emails[0] : null,
           });
           newUser.save().then((savedUser) => {
