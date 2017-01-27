@@ -31,7 +31,6 @@ export default (config) => {
     query
       .then((queriedUser) => {
         if (!queriedUser) {
-          winston.log('debug', 'user is not registered.');
           const newUser = new User({
             name: profile.displayName,
             id: profile.id,
@@ -39,17 +38,11 @@ export default (config) => {
             picture: profile.photos ? profile.photos[0].value : null,
             email: profile.emails ? profile.emails[0] : null,
           });
-          newUser.save().then((savedUser) => {
-            winston.log('debug', 'user registered successfully');
-            return savedUser;
-          });
+          newUser.save().then(savedUser => ({ savedUser }));
         }
         return queriedUser;
       })
-      .then((returnedUser) => {
-        winston.log('debug', 'returning user');
-        return callback(null, returnedUser);
-      })
+      .then(returnedUser => callback(null, returnedUser))
       .catch((error) => {
         winston.log('error', error);
         return callback(error, null);

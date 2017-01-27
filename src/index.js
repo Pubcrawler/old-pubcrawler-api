@@ -14,7 +14,6 @@ import api from './api';
 import facebook from './auth/facebook';
 import middleware from './middleware';
 
-winston.level = 'debug';
 
 const config = yamlConfig.load(path.join(__dirname, '/config.yml'));
 
@@ -22,11 +21,11 @@ winston.log('info', config);
 
 const app = express();
 
-let sessionOptions = {
+const sessionOptions = {
   secret: config.values.sessionSecret,
   resave: false,
   saveUninitialized: true,
-  cookie: {}
+  cookie: {},
 };
 
 if (app.get('env') === 'production') {
