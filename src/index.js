@@ -4,6 +4,7 @@ import process from 'process';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import express from 'express';
+import session from 'express-session';
 import winston from 'winston';
 import yamlConfig from 'node-yaml-config';
 import passport from 'passport';
@@ -13,13 +14,25 @@ import api from './api';
 import facebook from './auth/facebook';
 import middleware from './middleware';
 
-winston.level = 'debug';
 
 const config = yamlConfig.load(path.join(__dirname, '/config.yml'));
 
 winston.log('info', config);
 
 const app = express();
+
+const sessionOptions = {
+  secret: config.values.sessionSecret,
+  resave: false,
+  saveUninitialized: true,
+  cookie: {},
+};
+
+if (app.get('env') === 'production') {
+  sessionOptions.cookie.secure = true;
+}
+
+app.use(session(sessionOptions));
 
 app.use(passport.initialize());
 app.use(passport.session());
