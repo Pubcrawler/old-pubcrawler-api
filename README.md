@@ -1,26 +1,28 @@
-# pubcrawler-api
+# Abandoned stack
+
+## pubcrawler-api
 RESTful API for pubcrawler
 
-## API endpoints
+### API endpoints
 
-### Version
-##### GET /api/version
+#### Version
+###### GET /api/version
 Yields current API version
 
-### Me
-##### GET /api/me
+#### Me
+###### GET /api/me
 Yields data about the authenticated user, otherwise 401 error.
 
 
-## Authentication endpoints
+### Authentication endpoints
 
-### auth/facebook
+#### auth/facebook
 Authenticates the user through facebook.
 
 
 
 
-## Configuration: src/config.yml
+### Configuration: src/config.yml
 ```
 default:
   values:
